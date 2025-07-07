@@ -1,0 +1,2 @@
+firebase:
+  credentials: ${HEROFORGE_API_KEY}
