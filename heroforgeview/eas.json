@@ -1,0 +1,16 @@
+{
+  "cli": {
+    "version": ">=3.0.0"
+  },
+  "build": {
+    "production": {
+      "env": {
+        "GOOGLE_SERVICES_JSON": "${GOOGLE_SERVICES_JSON}",
+        "GOOGLE_SERVICE_INFO_PLIST": "${GOOGLE_SERVICE_INFO_PLIST}"
+      },
+      "hooks": {
+        "preinstall": "node eas-build-pre-install.js"
+      }
+    }
+  }
+}
