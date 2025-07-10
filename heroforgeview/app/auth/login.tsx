@@ -1,103 +1,89 @@
 import { ThemedView } from "@/components/ThemedView";
-import { useAuth } from "@/context/AuthContext";
-import { useRouter } from "expo-router";
 import { useState } from "react";
+import AntDesign from "@expo/vector-icons/AntDesign";
 import {
   Button,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
+  View,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { Image } from "expo-image";
+import { ThemedText } from "@/components/ThemedText";
+import Container from "@/components/containers/Container";
+import LoginOptions from "@/components/auth/LoginOptions";
+import InternalLink from "@/components/InternalLink";
+import NativePage from "@/components/containers/NativePage";
 export default function LoginScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login } = useAuth();
-  const router = useRouter();
   return (
-    <SafeAreaView>
+    <NativePage>
+      <View style={{ width: "100%", alignItems: "center" }}>
+        <Image
+          source={require("@/assets/images/adaptive-icon.png")}
+          style={styles.reactLogo}
+          contentFit="contain"
+        />
+      </View>
       <ThemedView style={styles.titleContainer}>
-        <Text style={styles.title}>Login</Text>
-
-        <TextInput
-          style={styles.input}
-          placeholder="Email"
-          onChangeText={setEmail}
-          autoCapitalize="none"
-          keyboardType="email-address"
-        />
-
-        <TextInput
-          style={styles.input}
-          placeholder="Password"
-          onChangeText={setPassword}
-          secureTextEntry
-        />
-
-        <Button title="Login" onPress={() => login(email, password)} />
-
-        <Text style={styles.or}>or</Text>
-
-        {/* <Button
-          title="Continue with Google"
-          onPress={onGoogleLogin}
-          color="#DB4437"
-        />
-        <Button
-          title="Continue with Facebook"
-          onPress={onFacebookLogin}
-          color="#3b5998"
-        /> */}
-
-        <TouchableOpacity onPress={() => router.push("/auth/register")}>
-          <Text style={styles.link}>
-            Don&apos;t have an account? Register here
-          </Text>
-        </TouchableOpacity>
+        <ThemedText type="title" style={{ textAlign: "center" }}>
+          HeroForge
+        </ThemedText>
       </ThemedView>
-    </SafeAreaView>
+      <ThemedText
+        type="subtitle"
+        style={{ textAlign: "center", fontSize: 14, marginBottom: 16 }}
+      >
+        Save the day-one habit at a time.
+      </ThemedText>
+      <TextInput
+        style={styles.input}
+        placeholder="Email"
+        onChangeText={setEmail}
+        autoCapitalize="none"
+        keyboardType="email-address"
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Password"
+        onChangeText={setPassword}
+        secureTextEntry
+      />
+      <LoginOptions email={email} password={password} />
+      <InternalLink route={"/auth/register"}>
+        <Text style={styles.link}>
+          Don&apos;t have an account? Register here
+        </Text>
+      </InternalLink>
+    </NativePage>
   );
 }
 
 const styles = StyleSheet.create({
+  reactLogo: {
+    width: "100%", // takes full available width
+    height: undefined, // allows auto-height from aspectRatio
+    aspectRatio: 1.6, // or whatever matches your image (e.g. 290 / 178 ≈ 1.63)
+    resizeMode: "contain", // scales the image without cropping
+    marginBottom: 16,
+  },
   titleContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  title: {
-    fontSize: 32,
-    marginBottom: 24,
-    fontWeight: "bold",
-    textAlign: "center",
+    gap: 16,
   },
   input: {
     borderWidth: 1,
     borderColor: "#ccc",
+    color: "white",
+    width: "100%",
     padding: 12,
     borderRadius: 8,
-    marginBottom: 16,
+    marginBottom: 32,
   },
   link: {
     color: "#1E90FF",
-    marginTop: 16,
+    marginVertical: 16,
     textAlign: "center",
-  },
-  or: {
-    textAlign: "center",
-    marginVertical: 12,
-    color: "#999",
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: "absolute",
   },
 });

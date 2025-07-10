@@ -18,6 +18,8 @@ import React, {
 type AuthContextType = {
   user: User | null;
   loading: boolean;
+  onGoogleLogin: any;
+  onFacebookLogin: any;
   login: (email: string, password: string) => Promise<void>;
   register: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
@@ -76,8 +78,22 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     setUser(null);
     await SecureStore.deleteItemAsync("refreshToken");
   };
+  const onFacebookLogin = async () => {
+    console.log("Facebook logging");
+  };
+  const onGoogleLogin = async () => {
+    console.log("Google login");
+  };
   const authSettings = useMemo(() => {
-    return { user, loading, login, register, logout };
+    return {
+      user,
+      loading,
+      login,
+      register,
+      logout,
+      onFacebookLogin,
+      onGoogleLogin,
+    };
   }, [loading, user]);
   return (
     <AuthContext.Provider value={authSettings}>{children}</AuthContext.Provider>
