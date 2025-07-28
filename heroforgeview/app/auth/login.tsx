@@ -52,7 +52,7 @@ export default function LoginScreen() {
         secureTextEntry
       />
       <LoginOptions email={email} password={password} />
-      <InternalLink route={"/auth/register"}>
+      <InternalLink route={"/auth/registration"}>
         <Text style={styles.link}>
           Don&apos;t have an account? Register here
         </Text>

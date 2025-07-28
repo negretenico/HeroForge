@@ -7,7 +7,7 @@ export default function LoginOption({
   onPress,
 }: PropsWithChildren & { onPress: any }) {
   return (
-    <Pill backgroundColor="#323232">
+    <Pill>
       <TouchableOpacity onPress={onPress}>{children}</TouchableOpacity>
     </Pill>
   );
