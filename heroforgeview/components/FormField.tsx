@@ -7,10 +7,10 @@ type FormFieldProps = {
   name: string;
   label?: string;
   placeholder?: string;
-  component?: typeof TextInput;
+  component?: React.ComponentType<any>;
   layout?: "vertical" | "horizontal";
   showError?: boolean;
-  inputProps?: React.ComponentProps<typeof TextInput>;
+  inputProps?: Record<string, any>;
 };
 
 export const FormField = ({
@@ -20,10 +20,10 @@ export const FormField = ({
   component: InputComponent = TextInput,
   layout = "vertical",
   showError = true,
+  type,
   inputProps = {},
 }: FormFieldProps) => {
   const [field, meta, helpers] = useField(name);
-
   return (
     <ThemedView>
       {showError && meta.touched && meta.error && (

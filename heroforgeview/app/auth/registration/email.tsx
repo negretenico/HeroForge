@@ -1,4 +1,5 @@
 import FormPage from "@/components/containers/FormPage";
+import NavigationScreen from "@/components/containers/NavigatingScreen";
 import { FormField } from "@/components/FormField";
 import * as Yup from "yup";
 const emailSchema = Yup.object().shape({
@@ -10,11 +11,10 @@ const emailSchema = Yup.object().shape({
   ),
 });
 export default function EmailScreen() {
-  const submitFunc = () => {};
   return (
-    <FormPage
+    <NavigationScreen
       validationSchema={emailSchema}
-      onSubmit={submitFunc}
+      route={"/(tabs)"}
       initialValues={{
         email: "",
         password: "",
@@ -22,20 +22,31 @@ export default function EmailScreen() {
       }}
     >
       <FormField
-        field={{
-          name: "email",
-          type: "email",
+        inputProps={{
+          keyboardType: "email-address",
         }}
-        error={{ name: "email" }}
+        name="email"
+        placeholder="email@example.com"
+        showError
       />
       <FormField
-        field={{ name: "password", type: "password" }}
-        error={{ name: "error" }}
+        inputProps={{
+          keyboardType: "password",
+          secureTextEntry: true,
+        }}
+        name="password"
+        placeholder="Enter your password"
+        showError
       />
       <FormField
-        field={{ name: "passwordConfirmation", type: "password" }}
-        error={{ name: "passwordConfirmation" }}
+        name="passwordConfirmation"
+        placeholder="Confirm your password"
+        inputProps={{
+          keyboardType: "password",
+          secureTextEntry: true,
+        }}
+        showError
       />
-    </FormPage>
+    </NavigationScreen>
   );
 }

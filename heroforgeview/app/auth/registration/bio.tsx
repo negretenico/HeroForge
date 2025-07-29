@@ -3,21 +3,20 @@ import * as Yup from "yup";
 import { FormField } from "@/components/FormField";
 import { TextInput, Text } from "react-native";
 import { GLOGABL_STYLES } from "@/constants/Styles";
+import { useRouter } from "expo-router";
+import NavigationScreen from "@/components/containers/NavigatingScreen";
 const bioSchema = Yup.object().shape({
   name: Yup.string().required("Please enter your name"),
   phrase: Yup.string().optional(),
 });
 export default function BioScreen() {
-  const onSubmitFunc = () => {
-    console.log("Hi nico");
-  };
   return (
-    <FormPage
+    <NavigationScreen
       initialValues={{
         name: "",
       }}
       validationSchema={bioSchema}
-      onSubmit={onSubmitFunc}
+      route={"/auth/registration/pfp"}
     >
       <FormField
         name="name"
@@ -30,6 +29,6 @@ export default function BioScreen() {
         placeholder="I am the night"
         component={TextInput}
       />
-    </FormPage>
+    </NavigationScreen>
   );
 }

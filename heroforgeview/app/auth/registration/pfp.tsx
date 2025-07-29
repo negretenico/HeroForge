@@ -1,18 +1,23 @@
 import FormPage from "@/components/containers/FormPage";
+import NavigationScreen from "@/components/containers/NavigatingScreen";
+import FileInput from "@/components/FileInput";
 import { FormField } from "@/components/FormField";
 import * as Yup from "yup";
 const pfpSchema = Yup.object().shape({
   link: Yup.string().optional(),
 });
 export default function ProfilePicScreen() {
-  const onSubmit = () => {};
   return (
-    <FormPage
-      onSubmit={onSubmit}
+    <NavigationScreen
+      route={"/auth/registration/email"}
       validationSchema={pfpSchema}
       initialValues={{ link: "" }}
     >
-      <FormField field={{ name: "link", type: "file" }} />
-    </FormPage>
+      <FormField
+        name="link"
+        label="Upload your profile pic"
+        component={FileInput}
+      />
+    </NavigationScreen>
   );
 }
